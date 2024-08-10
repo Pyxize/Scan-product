@@ -1,4 +1,10 @@
-export const Nutriscore = ({ score }) => {
+type Score = 'a' | 'b' | 'c' | 'd' | 'e';
+
+interface NutriscoreProps {
+  score: Score;
+}
+
+export const Nutriscore = ({ score }: NutriscoreProps) => {
   return (
     <section>
       {score === 'a' ? (

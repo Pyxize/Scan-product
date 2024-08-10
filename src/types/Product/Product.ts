@@ -1,11 +1,32 @@
-export type TypeProductNutrition = {
-  image: string;
-  isKcal: boolean;
-  nutrient: number;
-  unit: string;
+export interface ProductFood {
+  code: string;
+  errors: [];
+  product: ProductInformation;
+  result: Result;
+  status: string;
+  warning: [];
+}
+
+type ProductInformation = {
+  brands: string;
+  brands_tags: string[];
+  ecoscore_score: number;
+  image_front_small_url: string;
+  image_url: string;
+  ingredients_text: string;
+  nutriments: Nutrients;
+  nutriscore: Nutriscore;
+  nutriscore_grade: string;
+  nutrition_data_per: string;
+  product_name: string;
 };
 
-export type TypeNutrients = {
+type Result = {
+  id: string;
+  lc_name: string;
+  name: string;
+};
+export type Nutrients = {
   carbohydrates: number;
   carbohydrates_100g: number;
   carbohydrates_serving: number;
@@ -77,6 +98,16 @@ export type Nutriscore = {
   '2023'?: NutriscoreYears;
 };
 
+type NutriscoreYears = {
+  category_available: number;
+  data: NutriscoreData | NutriscoreDataWithoutComponents;
+  grade: string;
+  nutrients_available: number;
+  nutriscore_applicable: number;
+  nutriscore_computed: number;
+  score: number;
+};
+
 type NutriscoreComponent = {
   id: string;
   points: number;
@@ -132,14 +163,4 @@ type NutriscoreDataWithoutComponents = {
   sugars: number;
   sugars_points: number;
   sugars_value: number;
-};
-
-type NutriscoreYears = {
-  category_available: number;
-  data: NutriscoreData | NutriscoreDataWithoutComponents;
-  grade: string;
-  nutrients_available: number;
-  nutriscore_applicable: number;
-  nutriscore_computed: number;
-  score: number;
 };

@@ -1,11 +1,15 @@
-import { TypeNutrients } from '../../types/Product/Product.ts';
-import ProteinSvg from '../../../public/img/fish-cooked.svg';
-import SaltSvg from '../../../public/img/salt.svg';
-import SugarSvg from '../../../public/img/sugar.svg';
-import FatSvg from '../../../public/img/gras.svg';
-import FireSvg from '../../../public/img/fire.svg';
+import { Nutrients } from '../../types/Product/Product.ts';
+import ProteinSvg from '../../assets/img/fish-cooked.svg';
+import SaltSvg from '../../assets/img/salt.svg';
+import SugarSvg from '../../assets/img/sugar.svg';
+import FatSvg from '../../assets/img/gras.svg';
+import FireSvg from '../../assets/img/fire.svg';
 
-export const ProductNutrition = ({ products }: TypeNutrients) => {
+interface ProductNutritionProps {
+  products: Nutrients;
+}
+
+export const ProductNutrition = ({ products }: ProductNutritionProps) => {
   return (
     <section>
       <div className="flex flex-col gap-4">

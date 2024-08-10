@@ -1,6 +1,11 @@
+/*
 import { Nutriscore } from '../Nutriscore/Nutriscore.tsx';
 
-export const Indicator = ({ productIndicator }) => {
+interface IndicatorProps {
+  productIndicator: string;
+}
+
+export const Indicator = ({ productIndicator }: IndicatorProps) => {
   return (
     <section className="flex flex-col">
       <h2 className="text-slate-800 font-bold text-xl mb-2">Indicateurs: </h2>
@@ -10,3 +15,6 @@ export const Indicator = ({ productIndicator }) => {
     </section>
   );
 };
+
+
+ */

@@ -1,6 +1,11 @@
-import { BarcodeScanner } from 'react-barcode-scanner';
+import { BarcodeScanner, DetectedBarcode } from 'react-barcode-scanner';
 
-export const Home = ({ camera, productScan }) => {
+interface HomeProps {
+  camera: boolean;
+  productScan: (barcode: DetectedBarcode) => void;
+}
+
+export const Home = ({ camera, productScan }: HomeProps) => {
   return (
     <section
       className={

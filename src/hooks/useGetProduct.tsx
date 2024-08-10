@@ -1,11 +1,15 @@
 import { useEffect, useState } from 'react';
 import { DetectedBarcode } from 'react-barcode-scanner';
 import axios from 'axios';
+import { ProductFood } from '../types/Product/Product.ts';
+import { ProductCosmetic } from '../types/Product/ProductCosmetic.ts';
 
 export const useGetProduct = () => {
-  const [productFood, setProductFood] = useState(null);
-  const [productBeauty, setProductBeauty] = useState(null);
-  const [scanProduct, setScanProduct] = useState<DetectedBarcode>('');
+  const [productFood, setProductFood] = useState<ProductFood | null>(null);
+  const [productBeauty, setProductBeauty] = useState<ProductCosmetic | null>(
+    null
+  );
+  const [scanProduct, setScanProduct] = useState<DetectedBarcode | null>(null);
   const [camera, setCamera] = useState(false);
   const [error, setError] = useState(false);
 
@@ -24,75 +28,55 @@ export const useGetProduct = () => {
     'result',
   ];
 
+  const fieldsCosmetic = [
+    'product_name',
+    'image_url',
+    'image_front_small_url',
+    'brands',
+    'brands_tags',
+    'nutriments',
+    'nutrition_data_per',
+    'ingredients_text',
+    'ingredients',
+    'ingredients_text_fr',
+    'result',
+    'additives_tags',
+  ];
+
   const fetchData = async () => {
     const [requestFood, requestBeauty] = await Promise.allSettled([
       axios.get(
-        `https://world.openfoodfacts.org/api/v3/product/${scanProduct.rawValue}.json}`
+        `https://world.openfoodfacts.org/api/v3/product/${scanProduct?.rawValue}.json?fields=${fields.toString()}`
       ),
-
       axios.get(
-        `https://world.openbeautyfacts.org/api/v3/product/${scanProduct.rawValue}.json`
+        `https://world.openbeautyfacts.org/api/v3/product/${scanProduct?.rawValue}.json?fields=${fieldsCosmetic}`
+        //`https://world.openbeautyfacts.org/api/v3/product/${scanProduct?.rawValue}.json`
       ),
     ]);
-    try {
-      if (requestFood.status === 'fulfilled') {
-        const foodData = requestFood.value.data;
-        if (!productFood || productFood.code !== foodData.code) {
-          console.log(foodData);
-          setProductFood(foodData);
-          setProductBeauty(null);
-          setCamera(true);
-        }
-      }
-
-      if (requestBeauty.status === 'fulfilled') {
-        const beautyData = requestBeauty.value.data;
-        if (!productBeauty || productBeauty.code !== beautyData.code) {
-          console.log(beautyData);
-          setProductBeauty(beautyData);
-          setProductFood(null);
-          setCamera(true);
-        }
-      }
-      if (
-        requestFood.status === 'rejected' &&
-        requestBeauty.status === 'rejected'
-      ) {
-        setError(true);
+    if (requestBeauty.status === 'fulfilled') {
+      const beautyData = requestBeauty.value.data;
+      if (!productBeauty || productBeauty.code !== beautyData.code) {
+        console.log('beautyData', beautyData);
+        setProductBeauty(beautyData);
+        setProductFood(null);
         setCamera(true);
       }
-    } catch (error: Error) {
-      setCamera(false);
+    } else if (requestFood.status === 'fulfilled') {
+      const foodData = requestFood.value.data;
+      if (!productFood || productFood.code !== foodData.code) {
+        console.log('foodData', foodData);
+        setProductFood(foodData);
+        setProductBeauty(null);
+        setCamera(true);
+      }
+    } else if (
+      requestFood.status === 'rejected' &&
+      requestBeauty.status === 'rejected'
+    ) {
+      setError(true);
+      setCamera(true);
     }
   };
-  /*
-       Promise.allSettled([requestFood, requestBeauty]).then(
-         async ([foodResponse, beautyResponse]) => {
-           const foodData = foodResponse.json();
-           const beautyData = beautyResponse.json();
-           if (foodResponse.ok) {
-             setProductBeauty(null);
-             setCamera(true);
-             if (productFood && productFood.code === foodData.code) {
-               console.log('ici', productFood);
-               return;
-             }
-             setProductFood(await foodData);
-           } else if (beautyResponse.ok) {
-             setProductFood(null);
-             setCamera(true);
-             if (productBeauty && productBeauty.code === beautyData.code) {
-               return;
-             }
-             setProductBeauty(productBeauty);
-             console.log(beautyData);
-           } else {
-             setCamera(false);
-           }
-         }
-       );
-
-        */
 
   useEffect(() => {
     if (scanProduct) {

@@ -1,18 +1,20 @@
+/*
 import { toKcal } from '../../utils/ConvertKcal.ts';
-import { Nutriscore, TypeNutrients } from '../../types/Product/Product.ts';
+import { Nutriscore, Nutrients } from '../../types/Product/Product.ts';
 import { Accordion } from '../Accordion/Accordion.tsx';
-import { Progress } from '../progress/Progress.tsx';
+import ProteinSvg from '../../assets/img/fish-cooked.svg';
+import SaltSvg from '../../assets/img/salt.svg';
+import SugarSvg from '../../assets/img/sugar.svg';
+import FatSvg from '../../assets/img/gras.svg';
+import FireSvg from '../../assets/img/fire.svg';
+
 
 interface ProductNutritionInfoRowProps {
-  productsNutrient: TypeNutrients;
+  productsNutrient: Nutrients;
 }
 
 interface ProductInfoRow {
-  productsNutrient: TypeNutrients;
-  productsNutriscore: Nutriscore;
-}
-
-interface ProductNutriscoreProps {
+  productsNutrient: Nutrients;
   productsNutriscore: Nutriscore;
 }
 
@@ -21,11 +23,10 @@ const ProductNutrientInfo = ({
 }: ProductNutritionInfoRowProps) => {
   return (
     <div className="flex flex-col gap-4">
-      {/*CALORIES*/}
       <div className="flex justify-between">
         <div className="flex items-center gap-2">
           <div className="flex items-center justify-center bg-gray-200 h-12 w-12 rounded-lg">
-            <img width="24" height="24" src="../public/img/fire.svg" alt="" />
+            <img width="24" height="24" src={FireSvg} alt="" />
           </div>
           <h3>Calories</h3>
         </div>
@@ -34,16 +35,10 @@ const ProductNutrientInfo = ({
           {productsNutrient.energy_unit}
         </div>
       </div>
-      {/*PROTEINES*/}
       <div className="flex justify-between">
         <div className="flex items-center gap-2">
           <div className="flex items-center justify-center bg-gray-200 h-12 w-12 rounded-lg">
-            <img
-              width="24"
-              height="24"
-              src="../public/img/fish-cooked.svg"
-              alt=""
-            />
+            <img width="24" height="24" src={ProteinSvg} alt="" />
           </div>
           <h3>Protéines</h3>
         </div>
@@ -52,11 +47,10 @@ const ProductNutrientInfo = ({
           {productsNutrient.proteins_unit}
         </div>
       </div>
-      {/*SALT*/}
       <div className="flex justify-between">
         <div className="flex items-center gap-2">
           <div className="flex items-center justify-center bg-gray-200 h-12 w-12 rounded-lg">
-            <img width="24" height="24" src="../public/img/salt.svg" alt="" />
+            <img width="24" height="24" src={SaltSvg} alt="" />
           </div>
           <h3>Sel</h3>
         </div>
@@ -65,11 +59,10 @@ const ProductNutrientInfo = ({
           {productsNutrient.proteins_unit}
         </div>
       </div>
-      {/*SUGAR*/}
       <div className="flex justify-between">
         <div className="flex items-center gap-2">
           <div className="flex items-center justify-center bg-gray-200 h-12 w-12 rounded-lg">
-            <img width="24" height="24" src="../public/img/sugar.svg" alt="" />
+            <img width="24" height="24" src={SugarSvg} alt="" />
           </div>
           <h3>Sucre</h3>
         </div>
@@ -78,11 +71,10 @@ const ProductNutrientInfo = ({
           {productsNutrient.proteins_unit}
         </div>
       </div>
-      {/*GRAISSES SATURES */}
       <div className="flex justify-between">
         <div className="flex items-center gap-2">
           <div className="flex items-center justify-center bg-gray-200 h-12 w-12 rounded-lg">
-            <img width="24" height="24" src="../public/img/gras.svg" alt="" />
+            <img width="24" height="24" src={FatSvg} alt="" />
           </div>
           <h3>Graisses saturées</h3>
         </div>
@@ -95,10 +87,7 @@ const ProductNutrientInfo = ({
   );
 };
 
-const ProductNutriscoreInfo = ({
-  productsNutrient,
-  productsNutriscore,
-}: ProductInfoRow) => {
+const ProductNutriscoreInfo = () => {
   return (
     <div>
       <Accordion
@@ -117,13 +106,8 @@ const ProductNutriscoreInfo = ({
           </div>
         }
       >
-        <Progress
-          max={
-            productsNutriscore['2023']?.data.components.negative[0].points_max
-          }
-          value={productsNutriscore['2023']?.data.components.negative[0].points}
-        />
       </Accordion>
+
     </div>
   );
 };
@@ -142,3 +126,5 @@ export const ProductNutritionInfo = ({ products }) => {
     </section>
   );
 };
+
+ */

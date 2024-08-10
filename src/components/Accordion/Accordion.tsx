@@ -1,6 +1,6 @@
 import './Accordion.css';
 import { RiArrowDownSLine, RiArrowUpSLine } from '@remixicon/react';
-import { ReactElement, ReactHTMLElement, ReactNode, useState } from 'react';
+import { ReactElement, ReactNode, useState } from 'react';
 
 type AccordionProps = {
   title: string | ReactElement;

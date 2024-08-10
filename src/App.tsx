@@ -3,7 +3,6 @@ import { ProductNutrition } from './components/product/ProductNutrition.tsx';
 import { Home } from './pages/Home.tsx';
 import { ProductBeauty } from './components/product/ProductBeauty.tsx';
 import { NotFound } from './pages/NotFound.tsx';
-import { Indicator } from './components/Indicator/Indicator.tsx';
 
 export default function App() {
   const { productFood, productBeauty, setScanProduct, camera, error } =
@@ -20,13 +19,13 @@ export default function App() {
               <img
                 className="object-cover"
                 src={productFood.product.image_front_small_url}
-                alt={productFood.brands}
+                alt={productFood.product.brands}
               />
               <div className="flex flex-col items-center mt-4">
                 <h1 className="font-bold text-3xl text-emerald-800 uppercase text-center">
                   {productFood.product.product_name}
                 </h1>
-                <p className="font-normal text-emerald-800">
+                <p className="font-normal text-emerald-800 uppercase">
                   {productFood.product.brands_tags[0]}
                 </p>
               </div>
@@ -53,12 +52,9 @@ export default function App() {
               </h2>
               <p>{productFood.product.ingredients_text}</p>
             </div>
-            <div>
-              <Indicator productIndicator={productFood.product} />
-            </div>
           </div>
         ) : productBeauty && productBeauty.status === 1 ? (
-          <ProductBeauty productsBeauty={productBeauty} />
+          <ProductBeauty productsCosmetic={productBeauty} />
         ) : (
           error && <NotFound />
         )}
