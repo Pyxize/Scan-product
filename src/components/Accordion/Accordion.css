@@ -1,0 +1,24 @@
+details {
+    position: relative;
+}
+
+details summary {
+    list-style: none;
+}
+
+details summary::-webkit-details-marker {
+    display: none;
+}
+
+details summary::after {
+    font-size: 1.2em;
+    position: absolute;
+    right: 0;
+    transform: rotate(0deg);
+    transition: transform 0.3s ease;
+}
+
+details[open] summary::after {
+    transform: rotate(-90deg);
+
+}
