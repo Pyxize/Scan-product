@@ -33,7 +33,7 @@ export default function App() {
             <div className="flex flex-col justify-items-start gap-3">
               <div>
                 <h2 className="text-slate-800 font-bold text-xl">
-                  Informations nutritionneles
+                  Informations nutritionnelles
                 </h2>
                 <div className="flex justify-between">
                   <p className="text-sm text-gray-400">
