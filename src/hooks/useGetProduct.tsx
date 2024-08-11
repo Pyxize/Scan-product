@@ -56,7 +56,6 @@ export const useGetProduct = () => {
     if (requestBeauty.status === 'fulfilled') {
       const beautyData = requestBeauty.value.data;
       if (!productBeauty || productBeauty.code !== beautyData.code) {
-        console.log('beautyData', beautyData);
         setProductBeauty(beautyData);
         setProductFood(null);
         setCamera(true);
@@ -64,7 +63,6 @@ export const useGetProduct = () => {
     } else if (requestFood.status === 'fulfilled') {
       const foodData = requestFood.value.data;
       if (!productFood || productFood.code !== foodData.code) {
-        console.log('foodData', foodData);
         setProductFood(foodData);
         setProductBeauty(null);
         setCamera(true);
